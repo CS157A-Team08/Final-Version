@@ -26,3 +26,7 @@ body {
   font-size: 15px;
   color: #333333;
 }
+
+.container{
+  background-image: url(./bg.jpg);
+}

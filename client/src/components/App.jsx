@@ -8,6 +8,8 @@ import ManageLogin from "./ManageLogin";
 import ManageMenu from "./ManageMenu";
 import Products from "./Products";
 import StaffLogin from "./StaffLogin";
+import AddStaff from "./AddStaff";
+import StaffBio from "./StaffBio";
 
 class App extends Component {
   state = {};
@@ -23,6 +25,9 @@ class App extends Component {
           <Route path="/managemenu" component={ManageMenu}></Route>
           <Route path="/order" component={SingleOrder}></Route>
           <Route path="/product" component={Products}></Route>
+          <Route path="/managestaff" component={AddStaff}></Route>
+          <Route path="/staffbio" component={StaffBio}></Route>
+
         </Switch>
       </React.Fragment>
     );

@@ -94,6 +94,7 @@ if (err) {
 }
 });
 
+
 app.get("/", (req, res) => {
   res.send("connected");
 });
@@ -141,6 +142,19 @@ app.get("/employee/:id", (req, res) => {
     }
   });
 });
+app.get("/addStaff", (req, res) => {
+  const {  name, phone, position, password } = req.query;
+  connection.query(
+    `INSERT INTO employee (name,phone,position,password) VALUES ('${name}','${phone}','${position}','${password}' )`,
+
+    (error, results) => {
+      if (error) {
+        return res.send(err);
+      }
+    }
+  );
+});
+
 
 
 app.get("/signup", (req, res) => {
@@ -165,6 +179,7 @@ app.get("/signup", (req, res) => {
   );
 });
 
+
 app.get("/lastcustomer", (req, res) => {
   connection.query(
     "SELECT customerID FROM customer ORDER BY customerID DESC LIMIT 1",
@@ -172,11 +187,35 @@ app.get("/lastcustomer", (req, res) => {
       if (err) {
         return res.send(err);
       } else {
-        console.log({data: result});
+        
         return res.json({ data: result });
       }
     }
   );
+});
+
+app.get("/order", (req, res) => {
+  const { cus,list } = req.query;
+  console.log("here");
+  console.log(JSON.stringify(list) );
+  /*
+  connection.query(
+    `INSERT INTO customer (name,phone) VALUES ('${name}','${phone}' )`, (error, results) => {
+      if (error) {
+        return res.send(err);
+      }
+    }
+  );
+  connection.query(
+    `SELECT * FROM customer WHERE phone=${phone}`,(err, result) => {
+      if (err) {
+        return res.send(err);
+      } else {
+        console.log({data: result});
+        return res.json({ data: result });
+      }
+    }
+  );*/
 });
 
 app.get("/managemenu", (req, res) => {

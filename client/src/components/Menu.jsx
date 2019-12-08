@@ -1,14 +1,16 @@
-import React, { Component } from "react";
+import React, { Component,ImageBackground } from "react";
 import MenuItem from "./MenuItem";
 import Login from "./Login";
 import Item from "./Item";
-import { MenuConsumer } from "./context";
+import { MenuProvider,MenuConsumer } from "./context";
+import bg from"./bg.jpg";
 
 
 
 class Menu extends Component {
   state = {
-    cus:""
+    cus:"",
+    list:[{id: "2"}]
   
   };
 
@@ -23,6 +25,14 @@ class Menu extends Component {
   
   });
 };
+addorder = () => {
+  fetch(
+    `http://localhost:4000/order?customer=${this.state.cus}&list=${this.state.list}`
+  ).then(response => response.json())
+  .then(response => { this.setState({cus:response.data[0].customerID});
+
+});
+};
 
  
   render() {
@@ -31,7 +41,7 @@ class Menu extends Component {
         {value => {
           return (
             <div>
-              <div style={{ display: "inline-block", width: "65%" }}>
+              <div style={{ display: "inline-block", width: "100%" }}>
                 
                 {value.menuItems.map(item => (
                   <MenuItem
@@ -47,13 +57,15 @@ class Menu extends Component {
                   display: "inline-block",
                   width: "30%",
                   position: "absolute",
-                  top: "10%"
+                  top: "10%",
+                  left:"80%"
                 }}
               >
         <div>
         
                   <h3>Cart</h3>
                   {value.cart.map(item => (
+
                     <Item
                       key={item.id}
                       onDelete={value.handleDelete}
@@ -68,11 +80,12 @@ class Menu extends Component {
                   <h3>total: ${value.total}</h3>
                   <button
                     className="btn btn-primary btn-lg m-2"
-                    onClick={() => console.log(value.cart)}
+                    onClick={() =>{ console.log(this.state.list);
+                    this.addorder();}}
                   >
                     Submit
                   </button>
-                  <h3>id: {this.state.cus}</h3>
+                  
                 </div>
               </div>
             </div>

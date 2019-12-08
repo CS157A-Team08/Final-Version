@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { ImageBackground,Component } from "react";
 import Menu from "./Menu";
 import NavBar from "./Navbar";
 import RecMenu from "./RecMenu";
@@ -10,11 +10,14 @@ import StaffBio from "./StaffBio"
 import id from "./Login"
 
 class MainPage extends Component {
+
   
   state = {id: id};
   render() {
     return (
+      
       <React.Fragment>
+       
         <NavBar />
 
         <Switch>

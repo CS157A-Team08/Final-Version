@@ -60,7 +60,7 @@ class Cart extends Component {
       <div
         style={{
           display: "inline-block",
-          width: "20%",
+          width: "10%",
           position: "absolute",
           top: "10%"
         }}

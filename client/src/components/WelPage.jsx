@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component,ImageBackground } from "react";
 import { Link } from "react-router-dom";
+
 
 class WelPage extends Component {
   state = {};
   render() {
+
     return (
+
+      
       <div>
-        <div  style={{ backgroundImage:`url(https://wallup.net/wp-content/uploads/1413914382.jpg)` }}>
+        
         <div style={{ position: "absolute", left: "30%", top: "40%" }}>
           <h1>Self-Ordering Dining System</h1>
         </div>
@@ -19,11 +23,13 @@ class WelPage extends Component {
             >
               Start Ordering
             </button>
-          </Link>
+         </Link>
         </div>
       </div>
-      </div>
+
+ 
     );
+   
   }
 }
 
