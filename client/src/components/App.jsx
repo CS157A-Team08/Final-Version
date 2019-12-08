@@ -6,7 +6,7 @@ import MainPage from "./MainPage";
 import SingleOrder from "./SingleOrder";
 import ManageLogin from "./ManageLogin";
 import ManageMenu from "./ManageMenu";
-
+import Products from "./Products";
 import StaffLogin from "./StaffLogin";
 
 class App extends Component {
@@ -22,10 +22,9 @@ class App extends Component {
           <Route path="/managelogin" component={ManageLogin}></Route>
           <Route path="/managemenu" component={ManageMenu}></Route>
           <Route path="/order" component={SingleOrder}></Route>
+          <Route path="/product" component={Products}></Route>
         </Switch>
       </React.Fragment>
     );
   }
-}
-
-export default App;
+}export default App;

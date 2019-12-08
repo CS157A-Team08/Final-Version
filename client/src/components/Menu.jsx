@@ -1,10 +1,30 @@
 import React, { Component } from "react";
 import MenuItem from "./MenuItem";
-
+import Login from "./Login";
 import Item from "./Item";
 import { MenuConsumer } from "./context";
 
+
+
 class Menu extends Component {
+  state = {
+    cus:""
+  
+  };
+
+  componentDidMount() {
+    this.findCustomer();
+  }
+  findCustomer = () => {
+    fetch(
+      `http://localhost:4000/lastcustomer`
+    ).then(response => response.json())
+    .then(response => { this.setState({cus:response.data[0].customerID});
+  
+  });
+};
+
+ 
   render() {
     return (
       <MenuConsumer>
@@ -12,6 +32,7 @@ class Menu extends Component {
           return (
             <div>
               <div style={{ display: "inline-block", width: "65%" }}>
+                
                 {value.menuItems.map(item => (
                   <MenuItem
                     key={item.id}
@@ -29,7 +50,8 @@ class Menu extends Component {
                   top: "10%"
                 }}
               >
-                <div>
+        <div>
+        
                   <h3>Cart</h3>
                   {value.cart.map(item => (
                     <Item
@@ -42,6 +64,7 @@ class Menu extends Component {
                   ))}
                 </div>
                 <div>
+              
                   <h3>total: ${value.total}</h3>
                   <button
                     className="btn btn-primary btn-lg m-2"
@@ -49,6 +72,7 @@ class Menu extends Component {
                   >
                     Submit
                   </button>
+                  <h3>id: {this.state.cus}</h3>
                 </div>
               </div>
             </div>

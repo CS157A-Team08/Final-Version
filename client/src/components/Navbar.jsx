@@ -41,10 +41,14 @@ class NavBar extends Component {
                 <NavDropdown.Item href="#action/3.4">Drinks</NavDropdown.Item>
               </Link>
             </NavDropdown>
+
+            <Link to="/main/staffbio">
+              <Nav.Link href="#staffbio">Staff Directory</Nav.Link>
+            </Link>
           </Nav>
           <Form inline>
             <Link to="/managelogin">
-              <Button variant="outline-success">Manage Menu</Button>
+              <Button variant="outline-success">Add</Button>
             </Link>
             <Link to="/staff">
               <Button variant="outline-success">Staff Login</Button>

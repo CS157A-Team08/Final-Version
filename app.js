@@ -36,12 +36,7 @@ let employee = `CREATE TABLE IF NOT EXISTS employee(
   position VARCHAR(255) ,
   password VARCHAR(60) NOT NULL
 )`;
-let shiftrecord = `CREATE TABLE IF NOT EXISTS shiftrecord(
-  shiftID INT PRIMARY KEY AUTO_INCREMENT,
-  empID INT NOT NULL,
-  starttime TIMESTAMP,
-  endtime TIMESTAMP
-)`;
+
 let topten = `CREATE TABLE IF NOT EXISTS topten(
   itemID INT PRIMARY KEY ,
   ranking INT
@@ -79,11 +74,7 @@ connection.query(menu, function(err, results, fields) {
         console.log(err.message);
       }
       });
-      connection.query(shiftrecord, function(err, results, fields) {
-        if (err) {
-          console.log(err.message);
-        }
-        });
+     
 
 connection.query(employee, function(err, results, fields) {
     if (err) {
@@ -94,6 +85,7 @@ connection.query(customer, function(err, results, fields) {
 if (err) {
   console.log(err.message);
 }
+
 });
 
 connection.query(orderdetails, function(err, results, fields) {
@@ -130,8 +122,8 @@ app.get("/customerorder", (req, res) => {
   );
 });
 
-app.get("/staffaccounts", (req, res) => {
-  connection.query("SELECT * FROM staffaccounts", (err, result) => {
+app.get("/employee", (req, res) => {
+  connection.query("SELECT * FROM employee", (err, result) => {
     if (err) {
       return res.send(err);
     } else {
@@ -140,23 +132,57 @@ app.get("/staffaccounts", (req, res) => {
   });
 });
 
-app.get("/login", (req, res) => {
-  const { name, phone } = req.query;
-  connection.query(
-    `INSERT INTO customer (name,phone) VALUES ('${name}','${phone}' )`,
+app.get("/employee/:id", (req, res) => {
+  connection.query("SELECT * FROM employee WHERE empID = " + req.params.id, (err, result) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.json({ data: result });
+    }
+  });
+});
 
-    (error, results) => {
+
+app.get("/signup", (req, res) => {
+  const { name, phone } = req.query;
+  console.log(req.query);
+  connection.query(
+    `INSERT INTO customer (name,phone) VALUES ('${name}','${phone}' )`, (error, results) => {
       if (error) {
         return res.send(err);
+      }
+    }
+  );
+  connection.query(
+    `SELECT * FROM customer WHERE phone=${phone}`,(err, result) => {
+      if (err) {
+        return res.send(err);
+      } else {
+        console.log({data: result});
+        return res.json({ data: result });
+      }
+    }
+  );
+});
+
+app.get("/lastcustomer", (req, res) => {
+  connection.query(
+    "SELECT customerID FROM customer ORDER BY customerID DESC LIMIT 1",
+    (err, result) => {
+      if (err) {
+        return res.send(err);
+      } else {
+        console.log({data: result});
+        return res.json({ data: result });
       }
     }
   );
 });
 
 app.get("/managemenu", (req, res) => {
-  const { id, name, price, imageURL, category } = req.query;
+  const {  name, price, imageURL, category } = req.query;
   connection.query(
-    `INSERT INTO menu (id,name,price,imageURL,category) VALUES ('${id}','${name}','${price}','${imageURL}','${category}' )`,
+    `INSERT INTO menu (name,price,imageURL,category) VALUES ('${name}','${price}','${imageURL}','${category}' )`,
 
     (error, results) => {
       if (error) {
@@ -166,13 +192,17 @@ app.get("/managemenu", (req, res) => {
   );
 });
 
-app.get("/drinks", (req, res) => {
-  connection.query("SELECT * FROM drinks", (err, result) => {
-    if (err) throw err;
+app.get("/stafflogin", (req, res) => {
+  const  {password } = req.query;
+  console.log('pass: '+password);
+  connection.query(`SELECT password FROM employee WHERE password='${password}'}'`, (err, result) => {
+    if (err) { console.log(error);
+      return res.send(err);}
     else {
+      console.log({data: result});
       return res.json({ data: result });
     }
-    res.end(JSON.stringify(results));
+    
   });
 });
 

@@ -3,12 +3,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 
 import { Link } from "react-router-dom";
-
+import { runInThisContext } from "vm";
+var cus;
 class Login extends Component {
   state = {
     name: "",
-    phone: ""
+    phone: "",
+    id:""
+  
   };
+  constructor() {
+    super();
+    this.addCustomer=this.addCustomer.bind(this);
+  }
+  
   handleNameChange = event => {
     this.setState({ name: event.target.value });
   };
@@ -17,10 +25,13 @@ class Login extends Component {
   };
   addCustomer = () => {
     fetch(
-      `http://localhost:4000/login?name=${this.state.name}&phone=${this.state.phone}`
-    );
-  };
+      `http://localhost:4000/signup?name=${this.state.name}&phone=${this.state.phone}`
+    ).then(response => response.json())
+    .then(response => { this.cus=response.data[0].customerID;console.log(this.cus);
+    this.setState({id:response.data[0].customerID});
+  });
 
+  };
   render() {
     return (
       <div style={{ position: "absolute", left: "40%", top: "30%" }}>
@@ -58,5 +69,5 @@ class Login extends Component {
     );
   }
 }
-
+console.log(cus);
 export default Login;

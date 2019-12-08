@@ -5,15 +5,16 @@ import { Link } from "react-router-dom";
 
 class ManageMenu extends Component {
   state = {
-    id: 17,
     name: "",
     price: 0,
     imageURL: "",
     category: ""
   };
+  /*
   handleIDChange = event => {
     this.setState({ id: event.target.value });
   };
+  */
   handleNameChange = event => {
     this.setState({ name: event.target.value });
   };
@@ -29,7 +30,7 @@ class ManageMenu extends Component {
   };
   addToMenu = () => {
     fetch(
-      `http://localhost:4000/managemenu?id=${this.state.id}&name=${this.state.name}&price=${this.state.price}
+      `http://localhost:4000/managemenu?name=${this.state.name}&price=${this.state.price}
       &imageURL=${this.state.imageURL}&category=${this.state.category}`
     );
   };
@@ -37,15 +38,8 @@ class ManageMenu extends Component {
     return (
       <div style={{ position: "absolute", left: "40%", top: "10%" }}>
         <Form>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>ID</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="17"
-              value={this.state.id}
-              onChange={this.handleIDChange}
-            />
-          </Form.Group>
+          
+          
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>

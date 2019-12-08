@@ -6,9 +6,12 @@ import SeafoodMenu from "./SeafoodMenu";
 import SidesMenu from "./SidesMenu";
 import DrinksMenu from "./DrinksMenu";
 import { Switch, Route } from "react-router-dom";
+import StaffBio from "./StaffBio"
+import id from "./Login"
 
 class MainPage extends Component {
-  state = {};
+  
+  state = {id: id};
   render() {
     return (
       <React.Fragment>
@@ -20,6 +23,7 @@ class MainPage extends Component {
           <Route path="/main/seafood" component={SeafoodMenu} />
           <Route path="/main/sides" component={SidesMenu} />
           <Route path="/main/drinks" component={DrinksMenu} />
+          <Route path="/main/staffbio" component={StaffBio}/>
         </Switch>
       </React.Fragment>
     );

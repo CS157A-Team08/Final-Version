@@ -3,13 +3,7 @@ import Item from "./item";
 
 class Cart extends Component {
   state = {
-    items: [
-      { id: 0, value: "Water: ", price: 1.0, counter: 1 },
-      { id: 1, value: "Coke: ", price: 2.0, counter: 1 },
-      { id: 2, value: "Diet Coke: ", price: 3.5, counter: 1 },
-      { id: 3, value: "Milk: ", price: 4.0, counter: 1 },
-      { id: 4, value: "Beer: ", price: 5.0, counter: 1 }
-    ],
+
     cart: [],
     total: 15.5
   };
