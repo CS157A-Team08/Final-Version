@@ -1,17 +1,17 @@
 import React, { Component} from "react";
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
-class WelPage extends Component {
+class thanks extends Component {
   state = {};
   render() {
     return (
       <div>
         <div  style={{ backgroundImage:`url(https://wallup.net/wp-content/uploads/1413914382.jpg)` }}>
         <div style={{ position: "absolute", left: "34%", top: "40%" }}>
-          <h1>Welcome to MYSQL Diner !</h1>
+          <h2>Thank you for your order.</h2>
         </div>
         <div style={{ position: "absolute", left: "40%", top: "50%" }}>
-          <Link to="/main/login">
+          <Link to="/">
           
             <button
               href="./components/login"
@@ -19,7 +19,7 @@ class WelPage extends Component {
               className="btn btn-warning btn-lg"
               variant="secondary"
             >
-              Hungry? Start Ordering->
+              Home
             </button>
          
           </Link>
@@ -30,4 +30,4 @@ class WelPage extends Component {
   }
 }
 
-export default WelPage;
+export default thanks;

@@ -7,7 +7,7 @@ class ManageMenu extends Component {
   state = {
     id: 17,
     name: "",
-    price: 0,
+    price: "",
     imageURL: "",
     category: ""
   };
@@ -68,15 +68,19 @@ class ManageMenu extends Component {
             />
           </Form.Group>
 
-          <Form.Group category="formBasicEmail">
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="recommendation/Seeafood/Sides/Drinks"
-              value={this.state.category}
-              onChange={this.handleCategoryChange}
-            />
-          </Form.Group>
+          <Form.Group controlId="exampleForm.ControlSelect1">
+    <Form.Label>Category</Form.Label>
+    <Form.Control as="select" value={this.state.category}
+              onChange={this.handleCategoryChange}>
+                <option></option>
+                <option>Specialites</option>
+      <option>Starters</option>
+      <option>Entrees</option>
+      <option>Sides</option>
+      <option>Drinks</option>
+      <option>Desserts</option> 
+    </Form.Control>
+  </Form.Group>
           <Link to="/main/showMenu">
             <button
               type="submit"

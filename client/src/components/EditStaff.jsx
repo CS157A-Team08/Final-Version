@@ -1,10 +1,12 @@
+
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import { Link } from "react-router-dom";
 
-class AddStaff extends Component {
+class EditStaff extends Component {
   state = {
+    empID: "",
     name: "",
     phone: "",
     position: "",
@@ -22,23 +24,44 @@ class AddStaff extends Component {
   handlePasswordChange = event => {
     this.setState({ password: event.target.value });
   };
-  addStaff = () => {
+  editStaff = () => {
     fetch(
-      `http://localhost:4000/addStaff?name=${this.state.name}&phone=${this.state.phone}&position=${this.state.position}&password=${this.state.password}`
+      `http://localhost:4000/editStaff?empID=${this.state.empID}&name=${this.state.name}&phone=${this.state.phone}&position=${this.state.position}&password=${this.state.password}`
     );
+  };
+
+  componentDidMount() {
+    const { empID } = this.props.location.state;
+    this.setState({ empID: empID });
+    this.getCurrStaff(empID);
+  }
+
+  getCurrStaff = (empID) => {
+    fetch("http://localhost:4000/employee/" + empID)
+      .then(response => response.json())
+      .then(response => {
+        console.log("***DEBUG MSG: Get Current Staff Selection for edit - state empID: " + this.state.empID );
+        //this.setState({ currStaff: response.data[0] });
+        this.setState({ name: response.data[0].name });
+        this.setState({ phone: response.data[0].phone });
+        this.setState({ position: response.data[0].position });
+        this.setState({ password: response.data[0].password });
+        //this.getShiftRec(empID);
+        console.log("***DEBUG MSG: Get Current Staff Selection for edit - new current staff: " + response.data[0].name );
+      })
+      .catch(err => console.error(err));
   };
 
   render() {
     return (
       <div style={{ position: "absolute", left: "40%", top: "30%" }}>
-        <h3>Add new staff information:</h3>
+        <h3>Edit staff information:</h3>
         <br/>
         <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter Name"
               value={this.state.name}
               onChange={this.handleNameChange}
             />
@@ -48,7 +71,6 @@ class AddStaff extends Component {
             <Form.Label>Phone Number</Form.Label>
             <Form.Control
               type="text"
-              placeholder="(xxx)-xxx-xxxx"
               value={this.state.phone}
               onChange={this.handlePhoneChange}
             />
@@ -71,7 +93,6 @@ class AddStaff extends Component {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="text"
-              placeholder="password"
               value={this.state.password}
               onChange={this.handlePasswordChange}
             />
@@ -83,9 +104,9 @@ class AddStaff extends Component {
             <button
               type="submit"
               className="btn btn-outline-primary btn-lg"
-              onClick={this.addStaff}
+              onClick={this.editStaff}
             >
-              Add Staff
+              Submit
             </button>
         </Link>
         &ensp;
@@ -109,4 +130,4 @@ class AddStaff extends Component {
   }
 }
 
-export default AddStaff;
+export default EditStaff;

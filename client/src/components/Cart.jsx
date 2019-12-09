@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Item from "./item";
-
+import { Link } from "react-router-dom";
 class Cart extends Component {
   state = {
     items: [
@@ -88,7 +88,14 @@ class Cart extends Component {
         </div>
         <div>
           <h3>total: ${this.state.total}</h3>
+          <Link to={{
+                                                pathname: "/main/payment",
+                                                state: {
+                                                    total: this.state.total
+                                                }
+                                            }}>
           <button className="btn btn-primary btn-lg m-2">Submit</button>
+          </Link>
         </div>
       </div>
     );

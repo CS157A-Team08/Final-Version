@@ -8,12 +8,12 @@ class NavBar extends Component {
   render() {
     return (
       <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">Self-Ordering</Navbar.Brand>
+        <Navbar.Brand href="/">MYSQL DINER</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/">
-              <Nav.Link href="#home">Home</Nav.Link>
+            <Link to="/main">
+              <Nav.Link href="/main">Menu</Nav.Link>
             </Link>
 
             <NavDropdown title="Category" id="basic-nav-dropdown">
@@ -53,7 +53,7 @@ class NavBar extends Component {
           <Form inline>
         
             <Link to="/staff">
-              <Button variant="outline-success">Staff Login</Button>
+              <Button variant="outline-dark">Staff Login</Button>
             </Link>
           </Form>
         </Navbar.Collapse>

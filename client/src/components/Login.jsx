@@ -47,7 +47,7 @@ class Login extends Component {
           <Link to="/main">
             <button
               type="submit"
-              className="btn btn-outline-primary btn-lg"
+              className="btn btn-warning btn-lg"
               onClick={this.addCustomer}
             >
               Next

@@ -8,41 +8,26 @@ import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
 
 
 
-class showMenu extends Component {
+class showorders extends Component {
     state = {
         listOfMenu: [],
         currMenu: {},
         //currShiftRec: {}
     };
-
-
     componentDidMount() {
         this.getMenu();
         this.handleStaffSelection();
     }
 
     getMenu = () => {
-        fetch("http://localhost:4000/menu")
+        fetch("http://localhost:4000/orderlist")
             .then(response => response.json())
             .then(response => {
-                this.setState({ listOfMenu: response.data });
-                this.setState({ currMenu: this.state.listOfMenu[0] });
-                //        this.getShiftRec(this.state.currStaff.empID);
-                console.log("***DEBUG MSG: get all menu - menu name:" + response.data[0].name);
+           
+               
             })
             .catch(err => console.error(err));
     };
-
-    //  getShiftRec = (empID) => {
-    //    fetch("http://localhost:4000/shiftrecord/" + empID)
-    //      .then(response => response.json())
-    //      .then(response => {
-    //        this.setState({ currShiftRec: response.data[0] });
-    //        console.log("***DEBUG MSG: succeeded in getting shift record of empID: " + empID + " shiftID: " + response.data[0].shiftID );
-    //      })
-    //      .catch(err => console.error(err));
-    //  };
-
     handleStaffSelection = (id) => {
 
         fetch("http://localhost:4000/menu/" + id)
@@ -79,16 +64,16 @@ class showMenu extends Component {
 
         return (
 
-            <div style={{ position: "absolute", left: "10%", top: "10%", width: "100%" }}>
+            <div style={{ position: "absolute", left: "20%", top: "10%", width: "100%" }}>
 
                 <h1>Menu Directory</h1>
                 <br />
                 <div> <Link to="/main/managemenu">
                     <button
                         type="submit"
-                        className="btn btn-success btn-sm"
+                        className="btn btn-outline-primary btn-lg"
                     >
-                       + Add new Menu Item
+                        Add new Menu Item
             </button>
 
 
@@ -100,7 +85,7 @@ class showMenu extends Component {
                             <ul>
                                 <Card>
                                     <Card.Header>
-                                        <Accordion.Toggle as={Button} variant="Light" block eventKey={menu.id} onClick={() => this.handleStaffSelection(menu.id)}>{menu.name}</Accordion.Toggle>
+                                        <Accordion.Toggle as={Button} variant="link" eventKey={menu.id} onClick={() => this.handleStaffSelection(menu.id)}>{menu.name}</Accordion.Toggle>
                                     </Card.Header>
                                     <Accordion.Collapse eventKey={menu.id}>
                                         <Card.Body>
@@ -115,7 +100,21 @@ class showMenu extends Component {
                                             <strong>Category </strong>{this.state.currMenu.category}
                                             <div />
                                             <br />
-                                           
+                                            <Link to={{
+                                                pathname: "/main/deletemenu",
+                                                state: {
+                                                    id: this.state.currMenu.id
+                                                }
+                                            }}>
+                                               
+                                                <button
+                                                    className="btn btn-primary  btn-lg"
+                                                    type="submit"
+                                                >
+                                                    Delete
+                </button>
+                                            </Link>
+                                            &ensp;
                                             <Link to={{
                                                 pathname: "/main/editmenu",
                                                 state: {
@@ -125,25 +124,10 @@ class showMenu extends Component {
                                                
             <button
                                                     type="submit"
-                                                    className="btn btn-outline-dark btn-lg"
+                                                    className="btn btn-outline-primary btn-lg"
                                                 >
                                                     Edit Item
             </button>
-                                            </Link>
-                                            &ensp;
-                                            <Link to={{
-                                                pathname: "/main/deletemenu",
-                                                state: {
-                                                    id: this.state.currMenu.id
-                                                }
-                                            }}>
-                                               
-                                                <button
-                                                    className="btn btn-danger  btn-lg"
-                                                    type="submit"
-                                                >
-                                                    Delete
-                </button>
                                             </Link>
 
                                         </Card.Body>
@@ -166,4 +150,4 @@ class showMenu extends Component {
     }
 }
 
-export default showMenu;
+export default showorders;

@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import MenuItem from "./MenuItem";
+import { MenuProvider,MenuConsumer } from "./context";
+import { Link } from "react-router-dom";
+import Nav from 'react-bootstrap/Nav'
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
+
 
 import Item from "./Item";
 
@@ -13,7 +19,7 @@ class Menu extends Component {
     this.getMenuItems();
   }
   getMenuItems = () => {
-    fetch("http://localhost:4000/menu")
+    fetch("http://localhost:4000/menucat?category=drinks")
       .then(response => response.json())
       .then(response => this.setState({ menuItems: response.data }))
       .catch(err => console.error(err));
@@ -110,12 +116,44 @@ class Menu extends Component {
     this.setState({ total: i });
   }
 
+  
   render() {
     return (
       <div>
+          <div style={{ display: "inline-block", width: "80%",top: "25%", }}>
         <div style={{ display: "inline-block", width: "65%" }}>
+        <div className="d-flex flex-column"
+                style={{
+                  display: "inline-block",
+                  width: "50%",
+                  position: "absolute",
+                  float:"center",
+                  top: "8%",
+                  left:"12%"
+                }}
+              >
+      
+      <ButtonGroup aria-label="Basic example">
+  <Button href='/main' variant="secondary">All</Button>
+  <Button href='/main/chef'variant="secondary">Chef's Special</Button>
+  <Button href='/main/starters'variant="secondary">Starters</Button>
+  <Button href='/main/entrees'variant="secondary">Entrees</Button>
+  <Button href='/main/sides'href='/main/sides'variant="secondary">Sides</Button>
+  <Button href='/main/drinks'href='/main/drinks'variant="secondary">Drinks</Button>
+  <Button href='/main/desserts'variant="secondary">Desserts</Button>
+</ButtonGroup>
+</div>
+<div
+                style={{
+                  display: "inline-block",
+                  width: "100%",
+                  position: "absolute",
+                  top: "12%",
+                  left:"0%"
+                }}
+              >
           {this.state.menuItems.map(item => {
-            if (item.category === "drinks") {
+            
               return (
                 <MenuItem
                   key={item.id}
@@ -123,8 +161,10 @@ class Menu extends Component {
                   onIn={this.handleAdd}
                 ></MenuItem>
               );
-            }
-          })}
+            
+        })}
+        </div>
+        </div>
         </div>
 
         <div

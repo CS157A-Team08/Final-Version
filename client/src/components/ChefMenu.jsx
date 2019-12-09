@@ -16,7 +16,7 @@ class Menu extends Component {
     this.getMenuItems();
   }
   getMenuItems = () => {
-    fetch("http://localhost:4000/menucat?category=sides")
+    fetch("http://localhost:4000/menucat?category=Specialites")
       .then(response => response.json())
       .then(response => this.setState({ menuItems: response.data }))
       .catch(err => console.error(err));
@@ -138,7 +138,6 @@ class Menu extends Component {
   <Button href='/main/drinks'href='/main/drinks'variant="secondary">Drinks</Button>
   <Button href='/main/desserts'variant="secondary">Desserts</Button>
 </ButtonGroup>
-
 </div>
 <div
                 style={{
