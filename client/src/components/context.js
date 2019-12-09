@@ -85,7 +85,8 @@ class MenuProvider extends Component {
         total: addPrice
       };
     });
-
+    fetch(`http://localhost:4000/tempadd?id=${temp.id}`);
+      
     //console.log(temp.id);
     //console.log(this.state.cart);
   };
@@ -102,6 +103,7 @@ class MenuProvider extends Component {
     let i = temp[index].price;
     i = this.state.total + i;
     this.setState({ total: i });
+    fetch(`http://localhost:4000/tempin?id=${item.id}`);
   };
   handleDe = item => {
     const temp = [...this.state.cart];
@@ -117,15 +119,17 @@ class MenuProvider extends Component {
       temp[index].counter = 0;
     }
     this.setState({ cart: temp });
+    fetch(`http://localhost:4000/tempde?id=${item.id}`);
   };
   handleDelete = item => {
     const temp = this.state.cart.filter(c => c.id !== item.id);
+    fetch(`http://localhost:4000/tempdelete?id=${item.id}`);
     // loop thro temp and compute total
     let i = 0;
     temp.map(item => (i = i + item.price * item.counter));
     this.setState({ total: i });
     this.setState({ cart: temp });
-
+    
     // const tempI = this.state.menuItems.find(item => item.id === itemID);
     // console.log(tempI);
 

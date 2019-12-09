@@ -36,16 +36,9 @@ class ManageMenu extends Component {
   render() {
     return (
       <div style={{ position: "absolute", left: "40%", top: "10%" }}>
+        Add a Menu Item<br/><br/>
         <Form>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>ID</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="17"
-              value={this.state.id}
-              onChange={this.handleIDChange}
-            />
-          </Form.Group>
+       
 
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>
@@ -84,7 +77,7 @@ class ManageMenu extends Component {
               onChange={this.handleCategoryChange}
             />
           </Form.Group>
-          <Link to="/main">
+          <Link to="/main/showMenu">
             <button
               type="submit"
               className="btn btn-outline-primary btn-lg"

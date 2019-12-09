@@ -33,6 +33,7 @@ class Cart extends Component {
     let i = temp[index].price;
     i = this.state.total + i;
     this.setState({ total: i });
+    
   }
   handleDe(item) {
     const temp = [...this.state.items];
@@ -46,6 +47,7 @@ class Cart extends Component {
     let i = temp[index].price;
     i = this.state.total - i;
     this.setState({ total: i });
+    
   }
   handleDelete(itemID) {
     const temp = this.state.items.filter(c => c.id !== itemID);
@@ -54,6 +56,7 @@ class Cart extends Component {
     temp.map(item => (i = i + item.price * item.counter));
     this.setState({ total: i });
     this.setState({ items: temp });
+    
   }
   accTotal() {
     let i = 0;
