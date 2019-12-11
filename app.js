@@ -349,7 +349,25 @@ app.get("/payment", (req, res) => {
   );
 });
 
-
+app.get("/updatemenu", (req, res) => {
+  
+  const { orderID } = req.query;
+  console.log('here'+orderID);
+  connection.query(
+    
+    `UPDATE orders SET orederstatus='done' WHERE orderID='${orderID}'`,
+    (err, result) => {
+      if (err) {
+        return res.send(err);
+      }
+      else {
+        console.log('done');
+        return res.json({ data: "SUCCESS" });
+      }
+   
+    }
+  );
+});
 
 
 app.get("/tempadd", (req, res) => {
@@ -418,22 +436,48 @@ app.get("/tempde", (req, res) => {
   
 });
 
-app.get("/orderlist", (req, res) => {
-  connection.query(`SELECT orders.orderID, menu.name as item, orderdetails.quantity,customer.name
-  FROM orders,orderby,customer,orderdetails,orderiter,menu
-  WHERE orders.orderID=orderby.orderID AND orderby.customerID=customer.customerID AND orders.orderID=orderiter.orderID AND orderdetails.detailsID=orderiter.detailsID AND orderdetails.itemID=menu.id`
-  , (err, result) => {
+app.get("/menu/:id", (req, res) => {
+  connection.query("SELECT * FROM menu WHERE id = " + req.params.id, (err, result) => {
     if (err) {
       return res.send(err);
     } else {
-      console.log(JSON.parse(JSON.stringify(result)));
-      return res.json({  result });
+      return res.json({ data: result });
+      console.log(result);
     }
   });
 });
 
+app.get("/orderlist", (req, res) => {
+  connection.query(`SELECT orders.orderID, menu.name as item, orderdetails.quantity,customer.name
+  FROM orders,orderby,customer,orderdetails,orderiter,menu
+  WHERE orders.orderID=orderby.orderID AND orderby.customerID=customer.customerID AND orders.orderID=orderiter.orderID AND orderdetails.detailsID=orderiter.detailsID AND orderdetails.itemID=menu.id AND orders.orederstatus='undone'`
+  , (err, result) => {
+    if (err) {
+      return res.send(err);
+    } else {
+     
+      return res.json({ data: result });
+    }
+  });
+});
+
+app.get("/getorderid", (req, res) => {
+  console.log('here');
+  connection.query(`SELECT orderID FROM orders WHERE orederstatus='undone' ORDER BY orderID`
+  , (err, result) => {
+    if (err) {
+      return res.send(err);
+    } else {
+     console.log(result);
+      return res.json({ data: result });
+    }
+  });
+});
+
+
+
 app.get("/staffaccounts", (req, res) => {
-  connection.query("SELECT * FROM staffaccounts", (err, result) => {
+  connection.query("SELECT * FROM employee", (err, result) => {
     if (err) {
       return res.send(err);
     } else {
@@ -456,6 +500,16 @@ app.get("/login", (req, res) => {
 
     }
   );
+
+  app.get("/staffaccounts", (req, res) => {
+      connection.query("SELECT * FROM employee", (err, result) => {
+        if (err) {
+          return res.send(err);
+        } else {
+          return res.json({ data: result });
+        }
+      });
+    });
 });app.get("/employee", (req, res) => {
   connection.query("SELECT * FROM employee", (err, result) => {
     if (err) {

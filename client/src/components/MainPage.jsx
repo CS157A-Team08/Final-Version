@@ -22,6 +22,9 @@ import Login from "./Login";
 import EntreesMenu from "./EntreesMenu";
 import StartersMenu from "./StartersMenu"
 import ChefMenu from "./ChefMenu";
+import StaffLogin1 from "./StaffLogin";
+import StaffLogin2 from "./StaffLogin2";
+
 
 
 class MainPage extends Component {
@@ -53,6 +56,9 @@ class MainPage extends Component {
           <Route path="/main/starters" component={StartersMenu}></Route>
           <Route path="/main/chef" component={ChefMenu}></Route>
           <Route path="/main/login" component={Login}></Route>
+          <Route path="/main/staff1" component={StaffLogin1}></Route>
+          <Route path="/main/staff2" component={StaffLogin2}></Route>
+          
         </Switch>
       </React.Fragment>
     );

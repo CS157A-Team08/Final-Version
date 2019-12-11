@@ -11,7 +11,7 @@ class thanks extends Component {
           <h2>Thank you for your order.</h2>
         </div>
         <div style={{ position: "absolute", left: "40%", top: "50%" }}>
-          <Link to="/">
+          <Link to="/main">
           
             <button
               href="./components/login"

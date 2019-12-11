@@ -4,10 +4,10 @@ import Form from "react-bootstrap/Form";
 
 import { Link } from "react-router-dom";
 
-class StaffLogin1 extends Component {
+class StaffLogin2 extends Component {
   state = {
     staffAcc: [],
-    route: "/main/staff1", //ini as current page
+    route: "/main/staff2", //ini as current page
     username: "",
     password: ""
   };
@@ -73,7 +73,7 @@ class StaffLogin1 extends Component {
               }
               if (temp === 5) {
                 //change the route here to order page
-                this.setState({ route: "/main/showmenu" });
+                this.setState({ route: "/main/showorders" });
                 console.log(
                   accounts[0].username +
                     " " +
@@ -96,4 +96,4 @@ class StaffLogin1 extends Component {
   }
 }
 
-export default StaffLogin1;
+export default StaffLogin2;

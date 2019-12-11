@@ -52,8 +52,12 @@ class NavBar extends Component {
           </Nav>
           <Form inline>
         
-            <Link to="/staff">
-              <Button variant="outline-dark">Staff Login</Button>
+            <Link to="/main/staff1">
+              <Button variant="outline-dark">Manage</Button>
+            </Link>
+          
+          <Link to="/main/staff2">
+              <Button variant="outline-dark">Staff</Button>
             </Link>
           </Form>
         </Navbar.Collapse>
